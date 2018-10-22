@@ -1,0 +1,3 @@
+[submodule "engine"]
+	path = engine
+	url = https://MZ-HSH@bitbucket.org/bitpioneers/cgimin-18-19.git

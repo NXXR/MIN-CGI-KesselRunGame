@@ -13,3 +13,8 @@ namespace KesselRunGame
         }
     }
 }
+
+/***************************************************
+/ git submodule update --recursive --remote --force
+/ to update engine
+****************************************************/

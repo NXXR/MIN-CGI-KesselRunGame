@@ -55,6 +55,16 @@
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\engine\engine\engine.csproj">
+      <Project>{957d9c3c-f774-49c7-bfc0-725e52cd20c3}</Project>
+      <Name>engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KesselRunTests\KesselRunTests.csproj">
+      <Project>{62092cb0-0d79-4320-8ac1-414ae54e5e48}</Project>
+      <Name>KesselRunTests</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

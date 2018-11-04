@@ -48,11 +48,11 @@ namespace KesselRunGame
         private CameraMode cameraMode;
 
         // Constants
-        private const float BALL_RADIUS = 0.1f;
+        private const float BALL_RADIUS = 0.01f;
         private const float FIELD_X_BORDER = 2.65835f;
         private const float FIELD_Z_BORDER = 1.39379f;
         private const float GRAVITY = 0.0004f;
-        private const float ENERGY_LOSS_ON_BOTTOM = 1.01f;
+        private const float ENERGY_LOSS_ON_BOTTOM = .99f;
 
         // the objects we load
         private ObjLoaderObject3D tennisBallObject;
@@ -220,7 +220,7 @@ namespace KesselRunGame
             // ----------------------------------------------------------------------
             // draw the arena
             // ----------------------------------------------------------------------
-            zBufferMaterial.Draw(tennisArenaObject);
+            ambientDiffuseSpecularMaterial.Draw(tennisArenaObject, tennisArenaTexture, 30.0f);
 
 
             // ----------------------------------------------------------------------
@@ -243,7 +243,7 @@ namespace KesselRunGame
             tennisBallObject.Transformation *= Matrix4.CreateTranslation(ballPositionX, ballPositionY, ballPositionZ);
 
             // draw the ball
-            zBufferMaterial.Draw(tennisBallObject);
+            ambientDiffuseMaterial.Draw(tennisBallObject, tennisBallTexture);
 
 
             // ----------------------------------------------------------------------

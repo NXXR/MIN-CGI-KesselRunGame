@@ -11,32 +11,39 @@ using cgimin.engine.object3d;
 
 namespace KesselRunGame
 {
-    class Skybox : BaseObject3D
+    /// <summary>
+    /// Skybox Class to generate and texturize a Skybox
+    /// </summary>
+    public class Skybox
     {
+        /// <summary> 3D Object of the Skybox </summary>
+        private BaseObject3D skyboxObject;
+        /// <summary>  </summary>
+        private int texture;
+        private int material;
 
-        public Skybox()
+        public Skybox(int size)
         {
-            Positions = new List<Vector3>
+            // initialize & create Skybox 3D Object
+            skyboxObject.Positions = new List<Vector3>();
+            skyboxObject.UVs = new List<Vector2>();
+            skyboxObject.Normals = new List<Vector3>();
+            skyboxObject.Indices = new List<int>();
+
+            /*
+            private List<Vector3> corners = new List<Vector3>
             {
-                new Vector3(0, 0, 0),
-                new Vector3(0, 110, 0),
-                new Vector3(110, 110, 0),
-                new Vector3(110, 0, 0),
-                new Vector3(0, 0, 110),
-                new Vector3(0, 110, 110),
-                new Vector3(110, 110, 110),
-                new Vector3(110, 0, 110)
+                new Vector3(0, 0, 0),  //      6--------7
+                new Vector3(0, 1, 0),  //     /|       /|
+                new Vector3(1, 1, 0),  //    / |      / |
+                new Vector3(1, 0, 0),  //   2--|-----3  |
+                new Vector3(0, 0, 1),  //   |  5-----|--8
+                new Vector3(0, 1, 1),  //   | /      | /
+                new Vector3(1, 1, 1),  //   |/       |/
+                new Vector3(1, 0, 1)   //   1--------4
             };
-            UVs = new List<Vector2>();
-            Normals = new List<Vector3>();
-            Indices = new List<int>();
+            */
 
-
-            addTriangle(new Vector3(0, 1, 0), new Vector3(1, 1, 0), new Vector3(1, 2, 0), new Vector3(1, 1, 1), new Vector3(1, 1, 1), new Vector3(1, 1, 1),
-                        new Vector2(0, 0), new Vector2(1, 0), new Vector2(1, 1));
-
-
-            CreateVAO();
-        }
+    }
     }
 }

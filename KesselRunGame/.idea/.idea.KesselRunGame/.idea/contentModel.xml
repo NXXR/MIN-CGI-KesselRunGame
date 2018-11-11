@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\m_zeu\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\m_zeu\.Rider2018.2\system\resharper-host\Local\Transient\ReSharperHost\v182\SolutionCaches\_KesselRunGame.-47104489.00" t="ExcludeRecursive" />
+    <e p="D:\Documents\Hochschule\CGI\KesselRun\engine\engine" t="IncludeRecursive">
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="cgimin" t="Include">
+        <e p="engine" t="Include">
+          <e p="camera" t="Include">
+            <e p="Camera.cs" t="Include" />
+          </e>
+          <e p="light" t="Include">
+            <e p="Light.cs" t="Include" />
+          </e>
+          <e p="material" t="Include">
+            <e p="ambientdiffuse" t="Include">
+              <e p="AmbientDiffuse_FS.glsl" t="Include" />
+              <e p="AmbientDiffuse_VS.glsl" t="Include" />
+              <e p="AmbientDiffuseMaterial.cs" t="Include" />
+            </e>
+            <e p="ambientdiffusespecular" t="Include">
+              <e p="AmbientDiffuseSpecular_FS.glsl" t="Include" />
+              <e p="AmbientDiffuseSpecular_VS.glsl" t="Include" />
+              <e p="AmbientDiffuseSpecularMaterial.cs" t="Include" />
+            </e>
+            <e p="BaseMaterial.cs" t="Include" />
+            <e p="normalmapping" t="Include">
+              <e p="NormalMapping_FS.glsl" t="Include" />
+              <e p="NormalMapping_VS.glsl" t="Include" />
+              <e p="NormalMappingMaterial.cs" t="Include" />
+            </e>
+            <e p="simplereflection" t="Include">
+              <e p="SimpleReflection_FS.glsl" t="Include" />
+              <e p="SimpleReflection_VS.glsl" t="Include" />
+              <e p="SimpleReflectionMaterial.cs" t="Include" />
+            </e>
+            <e p="simpletexture" t="Include">
+              <e p="Simple_FS.glsl" t="Include" />
+              <e p="Simple_VS.glsl" t="Include" />
+              <e p="SimpleTextureMaterial.cs" t="Include" />
+            </e>
+            <e p="wobble1" t="Include">
+              <e p="Wobble1_FS.glsl" t="Include" />
+              <e p="Wobble1_VS.glsl" t="Include" />
+              <e p="Wobble1Material.cs" t="Include" />
+            </e>
+            <e p="wobble2" t="Include">
+              <e p="Wobble2_FS.glsl" t="Include" />
+              <e p="Wobble2_VS.glsl" t="Include" />
+              <e p="Wobble2Material.cs" t="Include" />
+            </e>
+            <e p="zbuffershader" t="Include">
+              <e p="ZBuffer_FS.glsl" t="Include" />
+              <e p="ZBuffer_VS.glsl" t="Include" />
+              <e p="ZBufferMaterial.cs" t="Include" />
+            </e>
+          </e>
+          <e p="object3d" t="Include">
+            <e p="BaseObject3D.cs" t="Include" />
+            <e p="CubeObject3D.cs" t="Include" />
+            <e p="ObjLoaderObject3D.cs" t="Include" />
+          </e>
+          <e p="texture" t="Include">
+            <e p="TextureManager.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="engine.csproj" t="IncludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="OpenTK.dll.config" t="Include" />
+      <e p="packages.config" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AssemblyInfo.cs" t="Include" />
+      </e>
+    </e>
+    <e p="D:\Documents\Hochschule\CGI\KesselRun\KesselRunGame" t="IncludeFlat">
+      <e p="KesselRunGame" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="classes" t="Include">
+          <e p="Skybox.cs" t="Include" />
+        </e>
+        <e p="data" t="Include">
+          <e p="objects" t="Include">
+            <e p="monkey.obj" t="Include" />
+            <e p="tennis_arena.obj" t="Include" />
+            <e p="tennis_ball.obj" t="Include" />
+            <e p="torus_flat.obj" t="Include" />
+            <e p="torus_smooth.obj" t="Include" />
+            <e p="wobble.obj" t="Include" />
+            <e p="wobble_subdivide.obj" t="Include" />
+          </e>
+          <e p="textures" t="Include">
+            <e p="shadow_color.png" t="Include" />
+            <e p="simple_reflection.png" t="Include" />
+            <e p="tennis_ball.png" t="Include" />
+            <e p="tennis_field.png" t="Include" />
+            <e p="test.png" t="Include" />
+            <e p="test2.png" t="Include" />
+            <e p="wobble.png" t="Include" />
+          </e>
+        </e>
+        <e p="KesselRunGame.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="OpenTK.dll.config" t="Include" />
+        <e p="packages.config" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="KesselRunGame.sln" t="IncludeFlat" />
+      <e p="KesselRunTests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="KesselRunTests.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="UnitTest1.cs" t="Include" />
+      </e>
+      <e p="packages" t="ExcludeRecursive">
+        <e p="MSTest.TestAdapter.1.3.2\build\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" t="Include" />
+        <e p="MSTest.TestAdapter.1.3.2\build\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" t="Include" />
+        <e p="MSTest.TestAdapter.1.3.2\build\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" t="Include" />
+      </e>
+    </e>
+  </component>
+</project>

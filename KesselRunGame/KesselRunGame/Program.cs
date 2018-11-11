@@ -1,5 +1,4 @@
-﻿#region --- Using Directives ---
-using System;
+﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +19,7 @@ using cgimin.engine.camera;
 using cgimin.engine.material.ambientdiffuse;
 using cgimin.engine.light;
 using cgimin.engine.material.zbuffershader;
-#endregion --- Using Directives ---
+// ReSharper disable All
 
 namespace KesselRunGame
 {

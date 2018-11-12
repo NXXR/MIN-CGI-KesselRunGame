@@ -68,13 +68,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="data\objects\monkey.obj" />
-    <None Include="data\objects\tennis_arena.obj" />
-    <None Include="data\objects\tennis_ball.obj" />
-    <None Include="data\objects\torus_flat.obj" />
-    <None Include="data\objects\torus_smooth.obj" />
-    <None Include="data\objects\wobble.obj" />
-    <None Include="data\objects\wobble_subdivide.obj" />
+    <None Include="data\objects\monkey.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\objects\tennis_arena.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\objects\tennis_ball.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\objects\torus_flat.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\objects\torus_smooth.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\objects\wobble.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\objects\wobble_subdivide.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -89,13 +103,27 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="data\textures\shadow_color.png" />
-    <Content Include="data\textures\simple_reflection.png" />
-    <Content Include="data\textures\tennis_ball.png" />
-    <Content Include="data\textures\tennis_field.png" />
-    <Content Include="data\textures\test.png" />
-    <Content Include="data\textures\test2.png" />
-    <Content Include="data\textures\wobble.png" />
+    <Content Include="data\textures\shadow_color.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\textures\simple_reflection.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\textures\tennis_ball.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\textures\tennis_field.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\textures\test.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\textures\test2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\textures\wobble.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

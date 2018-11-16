@@ -14,23 +14,18 @@ namespace KesselRunGame.classes
         /// <summary> 3D Object of the Skybox </summary>
         private BaseObject3D skyboxObject = new BaseObject3D();
 
-        /// <summary> enum for the Skybox-Textures </summary>
-        private enum Side:int
-        {
-            Left    = 0,
-            Right   = 1,
-            Bottom  = 2,
-            Top     = 3,
-            Back    = 4,
-            Front   = 5
-        }
-        /// <summary> List of Skybox Textures </summary>
-        private List<int> textures = new List<int>();
+        /// <summary> Skybox Texture </summary>
+        private int texture = 0;
         
         /// <summary> Skybox Material </summary>
         private SimpleTextureMaterial material;
 
-        public Skybox(float size, string SkyboxTextureFolder)
+        public Skybox()
+        {
+            Skybox(100.0f, "data/textures/cubemapTemplate")
+        }
+
+        public Skybox(float size, string SkyboxTexturePath)
         {
             //      Y
             //      |
@@ -84,12 +79,7 @@ namespace KesselRunGame.classes
             
 
             // setting Skybox-Texture
-            textures[(int)Side.Left]   = TextureManager.LoadTexture("data/textures/env_reflect_left.png");
-            textures[(int)Side.Right]  = TextureManager.LoadTexture("data/textures/env_reflect_right.png");
-            textures[(int)Side.Bottom] = TextureManager.LoadTexture("data/textures/env_reflect_bottom.png");
-            textures[(int)Side.Top]    = TextureManager.LoadTexture("data/textures/env_reflect_top.png");
-            textures[(int)Side.Back]   = TextureManager.LoadTexture("data/textures/env_reflect_back.png");
-            textures[(int)Side.Front]  = TextureManager.LoadTexture("data/textures/env_reflect_front.png");
+            texture = TextureManager.LoadTexture(SkyboxTexturePath);
             
             // setting Skybox-Material
             material = new SimpleTextureMaterial();

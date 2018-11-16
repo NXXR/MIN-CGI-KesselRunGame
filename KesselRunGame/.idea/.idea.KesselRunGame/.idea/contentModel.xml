@@ -102,8 +102,7 @@
             <e p="wobble_subdivide.obj" t="Include" />
           </e>
           <e p="textures" t="Include">
-            <e p="cubemap.jpg" t="Include" />
-            <e p="cubemapTemplate.jpg" t="Include" />
+            <e p="cubemap.png" t="Include" />
             <e p="shadow_color.png" t="Include" />
             <e p="simple_reflection.png" t="Include" />
             <e p="tennis_ball.png" t="Include" />

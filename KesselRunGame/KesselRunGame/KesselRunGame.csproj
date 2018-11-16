@@ -103,6 +103,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\textures\cubemap.jpg" />
+    <Content Include="data\textures\cubemapTemplate.jpg" />
     <Content Include="data\textures\shadow_color.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

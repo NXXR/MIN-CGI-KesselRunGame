@@ -25,10 +25,20 @@
               <e p="AmbientDiffuseSpecularMaterial.cs" t="Include" />
             </e>
             <e p="BaseMaterial.cs" t="Include" />
+            <e p="cubereflectionnormal" t="Include">
+              <e p="CubeReflectionNormal.cs" t="Include" />
+              <e p="CubeReflectionNormal_FS.glsl" t="Include" />
+              <e p="CubeReflectionNormal_VS.glsl" t="Include" />
+            </e>
             <e p="normalmapping" t="Include">
               <e p="NormalMapping_FS.glsl" t="Include" />
               <e p="NormalMapping_VS.glsl" t="Include" />
               <e p="NormalMappingMaterial.cs" t="Include" />
+            </e>
+            <e p="normalmappingcubespecular" t="Include">
+              <e p="NormalMappingCubeSpecular_FS.glsl" t="Include" />
+              <e p="NormalMappingCubeSpecular_VS.glsl" t="Include" />
+              <e p="NormalMappingCubeSpecularMaterial.cs" t="Include" />
             </e>
             <e p="simplereflection" t="Include">
               <e p="SimpleReflection_FS.glsl" t="Include" />
@@ -92,6 +102,8 @@
             <e p="wobble_subdivide.obj" t="Include" />
           </e>
           <e p="textures" t="Include">
+            <e p="cubemap.jpg" t="Include" />
+            <e p="cubemapTemplate.jpg" t="Include" />
             <e p="shadow_color.png" t="Include" />
             <e p="simple_reflection.png" t="Include" />
             <e p="tennis_ball.png" t="Include" />

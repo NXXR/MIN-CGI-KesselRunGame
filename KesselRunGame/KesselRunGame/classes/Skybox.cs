@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenTK;
-using OpenTK.Graphics.OpenGL;
-
+﻿using System.Collections.Generic;
+using cgimin.engine.material.simpletexture;
 using cgimin.engine.object3d;
 using cgimin.engine.texture;
-using cgimin.engine.material;
-using cgimin.engine.material.simpletexture;
+using OpenTK;
 
-namespace KesselRunGame
+namespace KesselRunGame.classes
 {
     /// <summary>
     /// Skybox Class to generate and texturize a Skybox
@@ -35,9 +28,9 @@ namespace KesselRunGame
         private List<int> textures = new List<int>();
         
         /// <summary> Skybox Material </summary>
-        private BaseMaterial material;
+        private SimpleTextureMaterial material;
 
-        public Skybox(float size, string texturePath)
+        public Skybox(float size, string SkyboxTextureFolder)
         {
             //      Y
             //      |
@@ -69,7 +62,7 @@ namespace KesselRunGame
 
             // setting Skybox-Faces  TODO: UV vectors
                 // Left Face (-X)
-            skyboxObject.addTriangle(corners[1], corners[2], corners[6], Vector3.UnitX, Vector3.UnitX, Vector3.UnitX, Vector2.Zero, Vector2.Zero, Vector2.Zero);  // 1-2-6
+            skyboxObject.addTriangle(corners[1], corners[2], corners[6], Vector3.UnitX, Vector3.UnitX, Vector3.UnitX, new Vector2(0.0f, 0.0f), Vector2.Zero, Vector2.Zero);  // 1-2-6
             skyboxObject.addTriangle(corners[1], corners[5], corners[6], Vector3.UnitX, Vector3.UnitX, Vector3.UnitX, Vector2.Zero, Vector2.Zero, Vector2.Zero);  // 1-5-6
                 // Right Face (+X)
             skyboxObject.addTriangle(corners[8], corners[7], corners[3], invX, invX, invX, Vector2.Zero, Vector2.Zero, Vector2.Zero);  // 8-7-3
@@ -91,12 +84,12 @@ namespace KesselRunGame
             
 
             // setting Skybox-Texture
-            textures[(int)Side.Left] = TextureManager.LoadTexture("data/textures/env_reflect_left.png");
-            textures[(int)Side.Right] = TextureManager.LoadTexture("data/textures/env_reflect_right.png");
+            textures[(int)Side.Left]   = TextureManager.LoadTexture("data/textures/env_reflect_left.png");
+            textures[(int)Side.Right]  = TextureManager.LoadTexture("data/textures/env_reflect_right.png");
             textures[(int)Side.Bottom] = TextureManager.LoadTexture("data/textures/env_reflect_bottom.png");
-            textures[(int)Side.Top] = TextureManager.LoadTexture("data/textures/env_reflect_top.png");
-            textures[(int)Side.Back] = TextureManager.LoadTexture("data/textures/env_reflect_back.png");
-            textures[(int)Side.Front] = TextureManager.LoadTexture("data/textures/env_reflect_front.png");
+            textures[(int)Side.Top]    = TextureManager.LoadTexture("data/textures/env_reflect_top.png");
+            textures[(int)Side.Back]   = TextureManager.LoadTexture("data/textures/env_reflect_back.png");
+            textures[(int)Side.Front]  = TextureManager.LoadTexture("data/textures/env_reflect_front.png");
             
             // setting Skybox-Material
             material = new SimpleTextureMaterial();

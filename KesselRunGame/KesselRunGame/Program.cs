@@ -19,6 +19,8 @@ using cgimin.engine.camera;
 using cgimin.engine.material.ambientdiffuse;
 using cgimin.engine.light;
 using cgimin.engine.material.zbuffershader;
+using KesselRunGame.classes;
+
 // ReSharper disable All
 
 namespace KesselRunGame
@@ -68,6 +70,9 @@ namespace KesselRunGame
         private SimpleTextureMaterial simpleTextureMaterial;
         private ZBufferMaterial zBufferMaterial;
 
+        // the Skybox
+        private Skybox skybox;
+        
         // the ball coordinates
         private float ballPositionX;
         private float ballPositionY;
@@ -76,6 +81,7 @@ namespace KesselRunGame
         private float ballDirectionX;
         private float ballDirectionZ;
         private float ballYVelocity;
+        
 
         private int updateCounter = 0;
 
@@ -129,6 +135,9 @@ namespace KesselRunGame
             simpleTextureMaterial = new SimpleTextureMaterial();
             zBufferMaterial = new ZBufferMaterial();
 
+            // initialize skybox
+            skybox = new Skybox();
+            
             // enebale z-buffer
             GL.Enable(EnableCap.DepthTest);
 
@@ -144,7 +153,7 @@ namespace KesselRunGame
             // the initial direction
             ballDirectionX = 0.02f;
             ballDirectionZ = 0.01f;
-
+            
             // initial camera
             cameraMode = CameraMode.AroundBall;
         }
@@ -203,11 +212,9 @@ namespace KesselRunGame
                                      new Vector3(ballPositionX, ballPositionY, ballPositionZ), Vector3.UnitY);
                     break;
             }
-
-
-
-
-
+            
+            // move skybox to camera
+            skybox.transform(Matrix4.CreateTranslation(Camera.Position));
         }
 
 
@@ -215,6 +222,11 @@ namespace KesselRunGame
         {
             // the screen and the depth-buffer are cleared
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            
+            // ----------------------------------------------------------------------
+            // draw the skybox
+            // ----------------------------------------------------------------------
+            skybox.Draw();
 
             // ----------------------------------------------------------------------
             // draw the arena

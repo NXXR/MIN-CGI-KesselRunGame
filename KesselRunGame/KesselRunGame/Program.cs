@@ -1,112 +1,84 @@
-﻿using System;
+﻿
+
+#region --- Using Directives ---
+
+using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using OpenTK;
-using OpenTK.Input;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-
 using cgimin.engine.object3d;
 using cgimin.engine.texture;
-using cgimin.engine.material.simpletexture;
-using cgimin.engine.material.wobble1;
-using cgimin.engine.material.simplereflection;
 using cgimin.engine.camera;
-using cgimin.engine.material.ambientdiffuse;
 using cgimin.engine.light;
-using cgimin.engine.material.zbuffershader;
-using KesselRunGame.classes;
+using cgimin.engine.material.normalmapping;
+using cgimin.engine.material.cubereflectionnormal;
+using cgimin.engine.material.normalmappingcubespecular;
+using System.Collections.Generic;
+using cgimin.engine.material.ambientdiffuse;
+using OpenTK.Input;
+using static cgimin.engine.material.BaseMaterial;
+using Engine.cgimin.engine.octree;
+using Engine.cgimin.engine.material.simpleblend;
+using Engine.cgimin.engine.terrain;
+using cgimin.engine.skybox;
+using cgimin.engine.gui;
 
-// ReSharper disable All
+#endregion --- Using Directives ---
 
-namespace KesselRunGame
+namespace Examples.Tutorial
 {
-    /*
-    class Program
-    {
-        static void Main(string[] args)
-        {
 
-        }
-    }
-    */
     public class CubeExample : GameWindow
     {
-        // enum for camera switch
-        private enum CameraMode : int
-        {
-            Corner,
-            Net,
-            TopView,
-            AroundBall
-        }
-
-        // camera mode
-        private CameraMode cameraMode;
-
-        // Constants
-        private const float BALL_RADIUS = 0.01f;
-        private const float FIELD_X_BORDER = 2.65835f;
-        private const float FIELD_Z_BORDER = 1.39379f;
-        private const float GRAVITY = 0.0004f;
-        private const float ENERGY_LOSS_ON_BOTTOM = .99f;
+        private const int NUMBER_OF_OBJECTS = 500;
 
         // the objects we load
-        private ObjLoaderObject3D tennisBallObject;
-        private ObjLoaderObject3D tennisArenaObject;
+        private ObjLoaderObject3D cubeObject;
+        private ObjLoaderObject3D smoothObject;
+        private ObjLoaderObject3D torusObject;
 
         // our textur-IDs
-        private int tennisBallTexture;
-        private int tennisArenaTexture;
-        private int shadowTexture;
+        private int checkerColorTexture;
+        private int blueMarbleColorTexture;
+
+        // normal map textures
+        private int brickNormalTexture;
+        private int stoneNormalTexture;
+
+        // cubical environment reflection texture
+        private int environmentCubeTexture;
+        private int darkerEnvCubeTexture;
 
         // Materials
+        private NormalMappingMaterial normalMappingMaterial;
+        private CubeReflectionNormalMaterial cubeReflectionNormalMaterial;
+        private NormalMappingCubeSpecularMaterial normalMappingCubeSpecularMaterial;
         private AmbientDiffuseSpecularMaterial ambientDiffuseSpecularMaterial;
-        private AmbientDiffuseMaterial ambientDiffuseMaterial;
-        private SimpleTextureMaterial simpleTextureMaterial;
-        private ZBufferMaterial zBufferMaterial;
+        private SimpleBlendMaterial simpleBlendMaterial;
 
-        // the Skybox
-        private Skybox skybox;
-        
-        // the ball coordinates
-        private float ballPositionX;
-        private float ballPositionY;
-        private float ballPositionZ;
+        // Octree
+        private Octree octree;
 
-        private float ballDirectionX;
-        private float ballDirectionZ;
-        private float ballYVelocity;
-        
+        // Terrain
+        private Terrain terrain;
 
+        // Skybox
+        private SkyBox skyBox;
+
+        // Font
+        private BitmapFont abelFont;
+
+        // Bitmap Graphics
+        private List<BitmapGraphic> bitmapGraphics;
+
+        // global update counter for animations etc.
         private int updateCounter = 0;
 
         public CubeExample()
             : base(1280, 720, new GraphicsMode(32, 24, 8, 2), "CGI-MIN Example", GameWindowFlags.Default, DisplayDevice.Default, 3, 0, GraphicsContextFlags.ForwardCompatible | GraphicsContextFlags.Debug)
-        {
-            this.KeyDown += KeyboardKeyDown;
-        }
-
-        void KeyboardKeyDown(object sender, KeyboardKeyEventArgs e)
-        {
-            if (e.Key == Key.Escape) this.Exit();
-
-            if (e.Key == Key.F11)
-                if (WindowState != WindowState.Fullscreen)
-                    WindowState = WindowState.Fullscreen;
-                else
-                    WindowState = WindowState.Normal;
-
-            if (e.Key == Key.Number1) cameraMode = CameraMode.Corner;
-            if (e.Key == Key.Number2) cameraMode = CameraMode.TopView;
-            if (e.Key == Key.Number3) cameraMode = CameraMode.Net;
-            if (e.Key == Key.Number4) cameraMode = CameraMode.AroundBall;
-
-        }
+        { }
 
 
         protected override void OnLoad(EventArgs e)
@@ -115,29 +87,41 @@ namespace KesselRunGame
 
             // Initialize Camera
             Camera.Init();
-            Camera.SetWidthHeightFov(800, 600, 60);
+            Camera.SetWidthHeightFov(1280, 720, 60);
+            Camera.SetLookAt(new Vector3(0, 0, 3), new Vector3(0, 0, 0), Vector3.UnitY);
 
             // Initialize Light
-            Light.SetDirectionalLight(new Vector3(1.0f, 1.0f, 0), new Vector4(0.3f, 0.3f, 0.3f, 0), new Vector4(1, 1, 1, 0), new Vector4(1, 1, 1, 0));
+            Light.SetDirectionalLight(new Vector3(1, -1, 2), new Vector4(0.3f, 0.3f, 0.3f, 0), new Vector4(0.8f, 0.8f, 0.8f, 0), new Vector4(1, 1, 1, 0));
 
             // Loading the object
-            tennisBallObject = new ObjLoaderObject3D("data/objects/tennis_ball.obj");
-            tennisArenaObject = new ObjLoaderObject3D("data/objects/tennis_arena.obj");
+            cubeObject = new ObjLoaderObject3D("data/objects/cube.obj", 0.8f, true);
+            smoothObject = new ObjLoaderObject3D("data/objects/round_stone.obj", 0.3f, true);
+            torusObject = new ObjLoaderObject3D("data/objects/torus_smooth.obj", 0.8f, true);
 
-            // Loading the textures
-            tennisBallTexture = TextureManager.LoadTexture("data/textures/tennis_ball.png");
-            tennisArenaTexture = TextureManager.LoadTexture("data/textures/tennis_field.png");
-            shadowTexture = TextureManager.LoadTexture("data/textures/shadow_color.png");
+            // Loading color textures
+            checkerColorTexture = TextureManager.LoadTexture("data/textures/b_checker.png");
+            blueMarbleColorTexture = TextureManager.LoadTexture("data/textures/marble_blue.png");
+
+            // Loading normal textures
+            brickNormalTexture = TextureManager.LoadTexture("data/textures/brick_normal.png");
+            stoneNormalTexture = TextureManager.LoadTexture("data/textures/stone_normal.png");
+    
+            // Load cube textures
+            environmentCubeTexture = TextureManager.LoadCubemap(new List<string>{ "data/textures/env_reflect_left.png", "data/textures/env_reflect_right.png",
+                                                                                  "data/textures/env_reflect_top.png",  "data/textures/env_reflect_bottom.png",
+                                                                                  "data/textures/env_reflect_back.png", "data/textures/env_reflect_front.png"});
+
+            darkerEnvCubeTexture = TextureManager.LoadCubemap(new List<string>{ "data/textures/cmap2_left.png", "data/textures/cmap2_right.png",
+                                                                                "data/textures/cmap2_top.png",  "data/textures/cmap2_bottom.png",
+                                                                                "data/textures/cmap2_back.png", "data/textures/cmap2_front.png"});
 
             // initialize material
+            normalMappingMaterial = new NormalMappingMaterial();
+            cubeReflectionNormalMaterial = new CubeReflectionNormalMaterial();
+            normalMappingCubeSpecularMaterial = new NormalMappingCubeSpecularMaterial();
             ambientDiffuseSpecularMaterial = new AmbientDiffuseSpecularMaterial();
-            ambientDiffuseMaterial = new AmbientDiffuseMaterial();
-            simpleTextureMaterial = new SimpleTextureMaterial();
-            zBufferMaterial = new ZBufferMaterial();
+            simpleBlendMaterial = new SimpleBlendMaterial();
 
-            // initialize skybox
-            skybox = new Skybox();
-            
             // enebale z-buffer
             GL.Enable(EnableCap.DepthTest);
 
@@ -145,136 +129,134 @@ namespace KesselRunGame
             GL.Enable(EnableCap.CullFace);
             GL.CullFace(CullFaceMode.Front);
 
-            // initial ball values
-            ballPositionX = 0.0f;
-            ballPositionY = 0.5f;
-            ballPositionZ = 0.0f;
+            // set keyboard event
+            this.KeyDown += new EventHandler<KeyboardKeyEventArgs>(KeyDownEvent);
 
-            // the initial direction
-            ballDirectionX = 0.02f;
-            ballDirectionZ = 0.01f;
-            
-            // initial camera
-            cameraMode = CameraMode.AroundBall;
+
+            // init matrial settings
+
+            // 'golden brick'
+            MaterialSettings brickGoldSettings = new MaterialSettings();
+            brickGoldSettings.colorTexture = checkerColorTexture;
+            brickGoldSettings.normalTexture = brickNormalTexture;
+            brickGoldSettings.shininess = 10.0f;
+
+            // 'completely mirrored cube'
+            MaterialSettings cubeReflectSettings = new MaterialSettings();
+            cubeReflectSettings.cubeTexture = environmentCubeTexture;
+            cubeReflectSettings.normalTexture = stoneNormalTexture;
+
+            // 'blue shiny stone"
+            MaterialSettings blueShinyStoneSettings = new MaterialSettings();
+            blueShinyStoneSettings.colorTexture = blueMarbleColorTexture;
+            blueShinyStoneSettings.normalTexture = stoneNormalTexture;
+            blueShinyStoneSettings.cubeTexture = darkerEnvCubeTexture;
+
+            // transparent blended material
+            MaterialSettings blendMaterialSettings = new MaterialSettings();
+            blendMaterialSettings.colorTexture = checkerColorTexture;
+            blendMaterialSettings.SrcBlendFactor = BlendingFactor.SrcColor;
+            blendMaterialSettings.DestBlendFactor = BlendingFactor.DstColor;
+
+            // Init Skybox
+            skyBox = new SkyBox("data/skybox/lakes_front.png", "data/skybox/lakes_back.png", "data/skybox/lakes_left.png", "data/skybox/lakes_right.png", "data/skybox/lakes_up.png", "data/skybox/lakes_down.png");
+
+            // Load Font
+            abelFont = new BitmapFont("data/fonts/abel_normal.fnt", "data/fonts/abel_normal.png");
+
+            // Load Sprites
+            bitmapGraphics = new List<BitmapGraphic>();
+            int marioTexture = TextureManager.LoadTexture("data/textures/mario_sprite.png");
+            for (int i = 0; i < 8; i++)
+            {
+                bitmapGraphics.Add(new BitmapGraphic(marioTexture, 512, 128, i * 64, 0, 64, 128));
+            }
+
+            // Init Octree
+            octree = new Octree(new Vector3(-30, -30, -30), new Vector3(30, 30, 30));
+
+
+            // generate random positions
+            Random random = new Random();
+
+            for (int i = 0; i < NUMBER_OF_OBJECTS; i++)
+            {
+                Matrix4 tranlatePos = Matrix4.CreateTranslation(random.Next(-200, 200) / 10.0f, random.Next(-200, 200) / 10.0f, random.Next(-200, 200) / 10.0f);
+
+                int whichObject = random.Next(4);
+
+                switch (whichObject)
+                {
+                    case 0:
+                        octree.AddEntity(new OctreeEntity(smoothObject, normalMappingCubeSpecularMaterial, blueShinyStoneSettings, tranlatePos));
+                        break;
+                    case 1:
+                        octree.AddEntity(new OctreeEntity(cubeObject, cubeReflectionNormalMaterial, cubeReflectSettings, tranlatePos));
+                        break;
+                    case 2:
+                        octree.AddEntity(new OctreeEntity(torusObject, normalMappingMaterial, brickGoldSettings, tranlatePos));
+                        break;
+                    case 3:
+                        octree.AddEntity(new OctreeEntity(cubeObject, simpleBlendMaterial, blendMaterialSettings, tranlatePos));
+                        break;
+
+                }
+            }
+
+            // Init terrain
+            terrain = new Terrain();
+
+
+        }
+
+        private void KeyDownEvent(object sender, OpenTK.Input.KeyboardKeyEventArgs e)
+        {
+            if (e.Key == OpenTK.Input.Key.F11)
+            {
+                if (WindowState != WindowState.Fullscreen)
+                {
+                    WindowState = WindowState.Fullscreen;
+                }
+                else
+                {
+                    WindowState = WindowState.Normal;
+                }
+            }
+
+            if (e.Key == OpenTK.Input.Key.Escape) this.Exit();
+
+
+
         }
 
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
+            KeyboardState keyboardState = Keyboard.GetState();
+
+            // update the fly-cam with keyboard input
+            Camera.UpdateFlyCamera(keyboardState[Key.Left], keyboardState[Key.Right], keyboardState[Key.Up], keyboardState[Key.Down],
+                                   keyboardState[Key.W], keyboardState[Key.S]);
+
             // updateCounter simply increaes
             updateCounter++;
-
-
-            // ---------------------------------------------
-            // update the ball (fake and simplified physics)
-            // ---------------------------------------------
-
-            // first the x and z position
-            ballPositionX += ballDirectionX;
-            ballPositionZ += ballDirectionZ;
-
-            if (ballPositionX > FIELD_X_BORDER - BALL_RADIUS) ballDirectionX = -Math.Abs(ballDirectionX);
-            if (ballPositionX < -FIELD_X_BORDER + BALL_RADIUS) ballDirectionX = Math.Abs(ballDirectionX);
-
-            if (ballPositionZ > FIELD_Z_BORDER - BALL_RADIUS) ballDirectionZ = -Math.Abs(ballDirectionZ);
-            if (ballPositionZ < -FIELD_Z_BORDER + BALL_RADIUS) ballDirectionZ = Math.Abs(ballDirectionZ);
-
-            // y-position affected by gravity
-            ballPositionY -= ballYVelocity;
-            ballYVelocity += GRAVITY;
-
-            if (ballPositionY < BALL_RADIUS)
-            {
-                ballYVelocity = -Math.Abs(ballYVelocity) * ENERGY_LOSS_ON_BOTTOM; // velocity always moving ball up, some kinetic energy lost so multiplied by ENERGY_LOSS_ON_BOTTOM 
-                ballPositionY = BALL_RADIUS;
-            }
-
-
-            // ---------------------------------------------
-            // set the camera, depending on state
-            // ---------------------------------------------
-            switch (cameraMode)
-            {
-                case CameraMode.Corner:
-                    Camera.SetLookAt(new Vector3(1, 1, 1), new Vector3(ballPositionX, ballPositionY, ballPositionZ), Vector3.UnitY);
-                    break;
-
-                case CameraMode.TopView:
-                    Camera.SetLookAt(new Vector3(0, 3, 0), new Vector3(0, 0, 0), Vector3.UnitZ);
-                    break;
-
-                case CameraMode.Net:
-                    Camera.SetLookAt(new Vector3(0, 1, 2), new Vector3(ballPositionX, ballPositionY, ballPositionZ), Vector3.UnitY);
-                    break;
-
-                case CameraMode.AroundBall:
-                    Camera.SetLookAt(new Vector3(ballPositionX + (float)Math.Sin(updateCounter * 0.01f) * 0.2f, ballPositionY, ballPositionZ + (float)Math.Cos(updateCounter * 0.01f) * 0.2f),
-                                     new Vector3(ballPositionX, ballPositionY, ballPositionZ), Vector3.UnitY);
-                    break;
-            }
-            
-            // move skybox to camera
-            skybox.transform(Matrix4.CreateTranslation(Camera.Position));
         }
 
 
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             // the screen and the depth-buffer are cleared
+            GL.ClearColor(0.3f, 0.3f, 0.3f, 1.0f);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            
-            // ----------------------------------------------------------------------
-            // draw the skybox
-            // ----------------------------------------------------------------------
-            skybox.Draw();
 
-            // ----------------------------------------------------------------------
-            // draw the arena
-            // ----------------------------------------------------------------------
-            ambientDiffuseSpecularMaterial.Draw(tennisArenaObject, tennisArenaTexture, 30.0f);
+            skyBox.Draw();
 
+            octree.Draw();
+            terrain.Draw(blueMarbleColorTexture, 1014, blueMarbleColorTexture, stoneNormalTexture, 0.2f, 60);
 
-            // ----------------------------------------------------------------------
-            // calculate ball's transformation matrix and draw the ball
-            // ----------------------------------------------------------------------
+            bitmapGraphics[(updateCounter / 10) % 8].Draw((updateCounter * 2 % 1920) - 1920 * 0.5f, 100, 1);
 
-            // reset the ball's transformation matrix
-            tennisBallObject.Transformation = Matrix4.Identity;
-
-            // first scale the ball's matrix
-            tennisBallObject.Transformation *= Matrix4.CreateScale(BALL_RADIUS, BALL_RADIUS, BALL_RADIUS);
-
-            // rotation of object, around x-axis
-            tennisBallObject.Transformation *= Matrix4.CreateRotationX(updateCounter / 20.0f);
-
-            // around y-axis
-            tennisBallObject.Transformation *= Matrix4.CreateRotationY(updateCounter / 10.0f);
-
-            // set the balls translation
-            tennisBallObject.Transformation *= Matrix4.CreateTranslation(ballPositionX, ballPositionY, ballPositionZ);
-
-            // draw the ball
-            ambientDiffuseMaterial.Draw(tennisBallObject, tennisBallTexture);
-
-
-            // ----------------------------------------------------------------------
-            // calculate shadow matrix unsing the ball object to draw a fake shadow
-            // ----------------------------------------------------------------------
-
-            // reset the ball shadows transformation matrix
-            tennisBallObject.Transformation = Matrix4.Identity;
-
-            // first scale the ball shadow matrix, y is 0 so the ball is flat
-            tennisBallObject.Transformation *= Matrix4.CreateScale(BALL_RADIUS, 0, BALL_RADIUS);
-
-            // set the ball shadows translation, y is constantly on the bottom (0.001f).
-            tennisBallObject.Transformation *= Matrix4.CreateTranslation(ballPositionX, 0.001f, ballPositionZ);
-
-            //tennisBallObject.Transformation *= Matrix4.CreateTranslation(ballPositionX - Light.lightDirection.X * ballPositionY, 0.001f, ballPositionZ - Light.lightDirection.Z * ballPositionY);
-
-            // draw the ball shadow
-            simpleTextureMaterial.Draw(tennisBallObject, shadowTexture);
-
+            abelFont.DrawString("Hallo, dies ist ein Text! Dargestellt mit der BitmapFont Klasse...", -700, -200,   255, 255, 255, 255);
 
             SwapBuffers();
         }
@@ -283,7 +265,7 @@ namespace KesselRunGame
 
         protected override void OnUnload(EventArgs e)
         {
-            tennisBallObject.UnLoad();
+            cubeObject.UnLoad();
         }
 
 
@@ -307,7 +289,3 @@ namespace KesselRunGame
     }
 }
 
-/***************************************************
-/ git submodule update --recursive --remote --force
-/ to update engine
-****************************************************/

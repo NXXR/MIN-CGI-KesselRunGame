@@ -38,14 +38,17 @@ namespace Examples.Tutorial
         private ObjLoaderObject3D cubeObject;
         private ObjLoaderObject3D smoothObject;
         private ObjLoaderObject3D torusObject;
+        private ObjLoaderObject3D cornerObject;
 
         // our textur-IDs
         private int checkerColorTexture;
         private int blueMarbleColorTexture;
+        private int primitiveColorTexture;
 
         // normal map textures
         private int brickNormalTexture;
         private int stoneNormalTexture;
+        private int primitiveNormalTexture;
 
         // cubical environment reflection texture
         private int environmentCubeTexture;
@@ -62,16 +65,16 @@ namespace Examples.Tutorial
         private Octree octree;
 
         // Terrain
-        private Terrain terrain;
+        //private Terrain terrain;
 
         // Skybox
         private SkyBox skyBox;
 
         // Font
-        private BitmapFont abelFont;
+        //private BitmapFont abelFont;
 
         // Bitmap Graphics
-        private List<BitmapGraphic> bitmapGraphics;
+        //private List<BitmapGraphic> bitmapGraphics;
 
         // global update counter for animations etc.
         private int updateCounter = 0;
@@ -80,6 +83,16 @@ namespace Examples.Tutorial
             : base(1280, 720, new GraphicsMode(32, 24, 8, 2), "CGI-MIN Example", GameWindowFlags.Default, DisplayDevice.Default, 3, 0, GraphicsContextFlags.ForwardCompatible | GraphicsContextFlags.Debug)
         { }
 
+        /*
+        // Curve Control Points
+        private float[] ctrlpts =
+        {
+            -4.0f, -4.0f, -4.0f,
+            -2.0f,  4.0f, -2.0f,
+             2.0f, -4.0f,  2.0f,
+             4.0f,  4.0f,  4.0f
+        };
+        */
 
         protected override void OnLoad(EventArgs e)
         {
@@ -97,14 +110,18 @@ namespace Examples.Tutorial
             cubeObject = new ObjLoaderObject3D("data/objects/cube.obj", 0.8f, true);
             smoothObject = new ObjLoaderObject3D("data/objects/round_stone.obj", 0.3f, true);
             torusObject = new ObjLoaderObject3D("data/objects/torus_smooth.obj", 0.8f, true);
+            cornerObject = new ObjLoaderObject3D("data/objects/cube.obj", 0.3f, true);
+            
 
             // Loading color textures
             checkerColorTexture = TextureManager.LoadTexture("data/textures/b_checker.png");
             blueMarbleColorTexture = TextureManager.LoadTexture("data/textures/marble_blue.png");
+            primitiveColorTexture = TextureManager.LoadTexture("data/textures/single_color.png");
 
             // Loading normal textures
             brickNormalTexture = TextureManager.LoadTexture("data/textures/brick_normal.png");
             stoneNormalTexture = TextureManager.LoadTexture("data/textures/stone_normal.png");
+            primitiveNormalTexture = TextureManager.LoadTexture("data/textures/primitives_normal.png");
     
             // Load cube textures
             environmentCubeTexture = TextureManager.LoadCubemap(new List<string>{ "data/textures/env_reflect_left.png", "data/textures/env_reflect_right.png",
@@ -157,24 +174,42 @@ namespace Examples.Tutorial
             blendMaterialSettings.colorTexture = checkerColorTexture;
             blendMaterialSettings.SrcBlendFactor = BlendingFactor.SrcColor;
             blendMaterialSettings.DestBlendFactor = BlendingFactor.DstColor;
+            
+            // "primitive corner stone"
+            MaterialSettings primitiveCornerSettings = new MaterialSettings();
+            primitiveCornerSettings.colorTexture = primitiveColorTexture;
+            primitiveCornerSettings.normalTexture = primitiveNormalTexture;
+            primitiveCornerSettings.shininess = 10.0f;
 
             // Init Skybox
             skyBox = new SkyBox("data/skybox/lakes_front.png", "data/skybox/lakes_back.png", "data/skybox/lakes_left.png", "data/skybox/lakes_right.png", "data/skybox/lakes_up.png", "data/skybox/lakes_down.png");
 
             // Load Font
-            abelFont = new BitmapFont("data/fonts/abel_normal.fnt", "data/fonts/abel_normal.png");
+            //abelFont = new BitmapFont("data/fonts/abel_normal.fnt", "data/fonts/abel_normal.png");
 
             // Load Sprites
+            /*
             bitmapGraphics = new List<BitmapGraphic>();
             int marioTexture = TextureManager.LoadTexture("data/textures/mario_sprite.png");
             for (int i = 0; i < 8; i++)
             {
                 bitmapGraphics.Add(new BitmapGraphic(marioTexture, 512, 128, i * 64, 0, 64, 128));
             }
+            */
 
             // Init Octree
             octree = new Octree(new Vector3(-30, -30, -30), new Vector3(30, 30, 30));
 
+            // add cornerstones & center
+            octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation(   0.0f,   0.0f,   0.0f)));
+            octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation(  20.0f,  20.0f,  20.0f)));
+            octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation( -20.0f,  20.0f,  20.0f)));
+            octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation(  20.0f,  20.0f, -20.0f)));
+            octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation( -20.0f,  20.0f, -20.0f)));
+            octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation(  20.0f, -20.0f,  20.0f)));
+            octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation( -20.0f, -20.0f,  20.0f)));
+            octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation(  20.0f, -20.0f, -20.0f)));
+            octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation( -20.0f, -20.0f, -20.0f)));
 
             // generate random positions
             Random random = new Random();
@@ -199,13 +234,17 @@ namespace Examples.Tutorial
                     case 3:
                         octree.AddEntity(new OctreeEntity(cubeObject, simpleBlendMaterial, blendMaterialSettings, tranlatePos));
                         break;
-
                 }
             }
 
             // Init terrain
-            terrain = new Terrain();
-
+            //terrain = new Terrain();
+            
+            /*
+            // Init Curve
+            GL.Map1(MapTarget.Map1Vertex3, 0.0f, 1.0f, 3, 4, ctrlpts);
+            GL.Enable(EnableCap.Map1Vertex3);
+            */
 
         }
 
@@ -250,13 +289,13 @@ namespace Examples.Tutorial
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             skyBox.Draw();
-
+            
             octree.Draw();
-            terrain.Draw(blueMarbleColorTexture, 1014, blueMarbleColorTexture, stoneNormalTexture, 0.2f, 60);
+            //terrain.Draw(blueMarbleColorTexture, 1014, blueMarbleColorTexture, stoneNormalTexture, 0.2f, 60);
 
-            bitmapGraphics[(updateCounter / 10) % 8].Draw((updateCounter * 2 % 1920) - 1920 * 0.5f, 100, 1);
+            //bitmapGraphics[(updateCounter / 10) % 8].Draw((updateCounter * 2 % 1920) - 1920 * 0.5f, 100, 1);
 
-            abelFont.DrawString("Hallo, dies ist ein Text! Dargestellt mit der BitmapFont Klasse...", -700, -200,   255, 255, 255, 255);
+            //abelFont.DrawString("Hallo, dies ist ein Text! Dargestellt mit der BitmapFont Klasse...", -700, -200,   255, 255, 255, 255);
 
             SwapBuffers();
         }

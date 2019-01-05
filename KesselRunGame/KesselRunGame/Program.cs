@@ -182,7 +182,7 @@ namespace Examples.Tutorial
             primitiveCornerSettings.shininess = 10.0f;
 
             // Init Skybox
-            skyBox = new SkyBox("data/skybox/lakes_front.png", "data/skybox/lakes_back.png", "data/skybox/lakes_left.png", "data/skybox/lakes_right.png", "data/skybox/lakes_up.png", "data/skybox/lakes_down.png");
+            skyBox = new SkyBox("data/skybox/neon_front.png", "data/skybox/neon_back.png", "data/skybox/neon_left.png", "data/skybox/neon_right.png", "data/skybox/neon_up.png", "data/skybox/neon_down.png");
 
             // Load Font
             //abelFont = new BitmapFont("data/fonts/abel_normal.fnt", "data/fonts/abel_normal.png");
@@ -272,6 +272,8 @@ namespace Examples.Tutorial
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             KeyboardState keyboardState = Keyboard.GetState();
+            
+            // TODO: Rhino.Geometry to add splines for camera movement
 
             // update the fly-cam with keyboard input
             Camera.UpdateFlyCamera(keyboardState[Key.Left], keyboardState[Key.Right], keyboardState[Key.Up], keyboardState[Key.Down],

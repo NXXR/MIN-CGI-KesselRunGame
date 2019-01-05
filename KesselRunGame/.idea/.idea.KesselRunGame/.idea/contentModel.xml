@@ -144,6 +144,18 @@
             <e p="lakes_left.png" t="Include" />
             <e p="lakes_right.png" t="Include" />
             <e p="lakes_up.png" t="Include" />
+            <e p="neon_back.png" t="Include" />
+            <e p="neon_down.png" t="Include" />
+            <e p="neon_front.png" t="Include" />
+            <e p="neon_left.png" t="Include" />
+            <e p="neon_right.png" t="Include" />
+            <e p="neon_up.png" t="Include" />
+            <e p="retro_back.png" t="Include" />
+            <e p="retro_down.png" t="Include" />
+            <e p="retro_front.png" t="Include" />
+            <e p="retro_left.png" t="Include" />
+            <e p="retro_right.png" t="Include" />
+            <e p="retro_up.png" t="Include" />
           </e>
           <e p="textures" t="Include">
             <e p="3colors.png" t="Include" />

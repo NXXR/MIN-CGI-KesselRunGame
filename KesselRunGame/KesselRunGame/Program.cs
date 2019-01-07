@@ -4,10 +4,14 @@
 
 using System;
 using System.IO;
-
+using System.Collections.Generic;
+using System.Management.Instrumentation;
+using System.Runtime.CompilerServices;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
+
 using cgimin.engine.object3d;
 using cgimin.engine.texture;
 using cgimin.engine.camera;
@@ -15,21 +19,22 @@ using cgimin.engine.light;
 using cgimin.engine.material.normalmapping;
 using cgimin.engine.material.cubereflectionnormal;
 using cgimin.engine.material.normalmappingcubespecular;
-using System.Collections.Generic;
 using cgimin.engine.material.ambientdiffuse;
-using OpenTK.Input;
 using static cgimin.engine.material.BaseMaterial;
+using cgimin.engine.skybox;
+using cgimin.engine.gui;
+
 using Engine.cgimin.engine.octree;
 using Engine.cgimin.engine.material.simpleblend;
 using Engine.cgimin.engine.terrain;
-using cgimin.engine.skybox;
-using cgimin.engine.gui;
+
+using Rhino.Collections;
+using Rhino.Geometry;
 
 #endregion --- Using Directives ---
 
 namespace Examples.Tutorial
 {
-
     public class CubeExample : GameWindow
     {
         private const int NUMBER_OF_OBJECTS = 500;
@@ -83,16 +88,10 @@ namespace Examples.Tutorial
             : base(1280, 720, new GraphicsMode(32, 24, 8, 2), "CGI-MIN Example", GameWindowFlags.Default, DisplayDevice.Default, 3, 0, GraphicsContextFlags.ForwardCompatible | GraphicsContextFlags.Debug)
         { }
 
-        /*
-        // Curve Control Points
-        private float[] ctrlpts =
-        {
-            -4.0f, -4.0f, -4.0f,
-            -2.0f,  4.0f, -2.0f,
-             2.0f, -4.0f,  2.0f,
-             4.0f,  4.0f,  4.0f
-        };
-        */
+        //*
+        // Track & Control Points
+        private Point3dList pts = new Point3dList();
+        
 
         protected override void OnLoad(EventArgs e)
         {
@@ -104,7 +103,7 @@ namespace Examples.Tutorial
             Camera.SetLookAt(new Vector3(0, 0, 3), new Vector3(0, 0, 0), Vector3.UnitY);
 
             // Initialize Light
-            Light.SetDirectionalLight(new Vector3(1, -1, 2), new Vector4(0.3f, 0.3f, 0.3f, 0), new Vector4(0.8f, 0.8f, 0.8f, 0), new Vector4(1, 1, 1, 0));
+            cgimin.engine.light.Light.SetDirectionalLight(new Vector3(1, -1, 2), new Vector4(0.3f, 0.3f, 0.3f, 0), new Vector4(0.8f, 0.8f, 0.8f, 0), new Vector4(1, 1, 1, 0));
 
             // Loading the object
             cubeObject = new ObjLoaderObject3D("data/objects/cube.obj", 0.8f, true);
@@ -240,11 +239,16 @@ namespace Examples.Tutorial
             // Init terrain
             //terrain = new Terrain();
             
-            /*
             // Init Curve
-            GL.Map1(MapTarget.Map1Vertex3, 0.0f, 1.0f, 3, 4, ctrlpts);
-            GL.Enable(EnableCap.Map1Vertex3);
-            */
+            pts.Add(-30.0, 0.0, 0.0);
+            pts.Add(-20.0, 0.0, 0.0);
+            pts.Add(-5.0, -10.0, -10.0);
+            pts.Add(5.0, 10.0, 10.0);
+            pts.Add(20.0, 0.0, 0.0);
+            pts.Add(30.0, 0.0, 0.0);
+            NurbsCurve track = NurbsCurve.Create(false, 5, pts);
+            if(track == null) Console.WriteLine("Failed to create Track");
+            if(!track.IsValidWithLog(out var log)) Console.WriteLine("Created invalid Track:\n" + log + "");
 
         }
 
@@ -263,8 +267,6 @@ namespace Examples.Tutorial
             }
 
             if (e.Key == OpenTK.Input.Key.Escape) this.Exit();
-
-
 
         }
 
@@ -303,7 +305,6 @@ namespace Examples.Tutorial
         }
 
 
-
         protected override void OnUnload(EventArgs e)
         {
             cubeObject.UnLoad();
@@ -329,4 +330,3 @@ namespace Examples.Tutorial
 
     }
 }
-

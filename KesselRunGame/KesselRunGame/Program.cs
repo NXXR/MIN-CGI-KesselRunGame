@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Management.Instrumentation;
 using System.Runtime.CompilerServices;
 using OpenTK;
@@ -28,8 +29,7 @@ using Engine.cgimin.engine.octree;
 using Engine.cgimin.engine.material.simpleblend;
 using Engine.cgimin.engine.terrain;
 
-using Rhino.Collections;
-using Rhino.Geometry;
+using Blinkenlights.Splines;
 
 #endregion --- Using Directives ---
 
@@ -88,15 +88,30 @@ namespace Examples.Tutorial
             : base(1280, 720, new GraphicsMode(32, 24, 8, 2), "CGI-MIN Example", GameWindowFlags.Default, DisplayDevice.Default, 3, 0, GraphicsContextFlags.ForwardCompatible | GraphicsContextFlags.Debug)
         { }
 
-        //*
-        // Track & Control Points
-        private Point3dList pts = new Point3dList();
+        private readonly double[][] trackPoints = {
+            new []{-20.0, 0.0, 0.0},
+            new []{-15.0, 0.0, -20.0},
+            new []{-10.0, 20.0, -20.0},
+            new []{-5.0, 20.0, 0.0},
+            new []{0.0, 0.0, 0.0},
+            new []{5.0, -20.0, 0.0},
+            new []{10.0, -20.0, 20.0},
+            new []{15.0, 0.0, 20.0},
+            new []{20.0, 0.0, 0.0}
+        };
+
+        private const int trackDeg = 3;
+
+        private readonly double[] trackKnots = new double[13]
+        {
+            0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 6, 6, 6
+        };
         
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
+            
             // Initialize Camera
             Camera.Init();
             Camera.SetWidthHeightFov(1280, 720, 60);
@@ -210,6 +225,7 @@ namespace Examples.Tutorial
             octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation(  20.0f, -20.0f, -20.0f)));
             octree.AddEntity(new OctreeEntity(cornerObject, normalMappingMaterial, primitiveCornerSettings, Matrix4.CreateTranslation( -20.0f, -20.0f, -20.0f)));
 
+            /*
             // generate random positions
             Random random = new Random();
 
@@ -235,20 +251,21 @@ namespace Examples.Tutorial
                         break;
                 }
             }
+            */
 
             // Init terrain
             //terrain = new Terrain();
             
-            // Init Curve
-            pts.Add(-30.0, 0.0, 0.0);
-            pts.Add(-20.0, 0.0, 0.0);
-            pts.Add(-5.0, -10.0, -10.0);
-            pts.Add(5.0, 10.0, 10.0);
-            pts.Add(20.0, 0.0, 0.0);
-            pts.Add(30.0, 0.0, 0.0);
-            NurbsCurve track = NurbsCurve.Create(false, 5, pts);
-            if(track == null) Console.WriteLine("Failed to create Track");
-            if(!track.IsValidWithLog(out var log)) Console.WriteLine("Created invalid Track:\n" + log + "");
+            float trackLength = 0;
+            float[] oldPoint = Array.ConvertAll(BSpline.Interpolate(0.0, trackDeg, trackPoints, trackKnots, null, null), input => (float) input);
+            for (double t = 0; t <= 1; t += 0.001)
+            {
+                float[] point = Array.ConvertAll(BSpline.Interpolate(t, trackDeg, trackPoints, trackKnots, null, null), input => (float)input);
+                octree.AddEntity(new OctreeEntity(smoothObject, normalMappingCubeSpecularMaterial, blueShinyStoneSettings, Matrix4.CreateTranslation(point[0], point[1], point[2])));
+                // calculate length of vector form old to new point and add to trackLength
+                trackLength += new Vector3(point[0] - oldPoint[0], point[1] - oldPoint[1], point[2] - oldPoint[2]).Length;
+            }
+            Console.WriteLine("[INFO]    trackLength: " + trackLength);
 
         }
 

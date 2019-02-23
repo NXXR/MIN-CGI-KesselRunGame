@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3328537-20f6-4588-bd76-ec42f42231e0" name="Default Changelist" comment="Skybox implementation 17-11&#10;TODO figure out Exception">
+    <list default="true" id="d3328537-20f6-4588-bd76-ec42f42231e0" name="Default Changelist" comment="changed spline interpolation from rhino t">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KesselRunGame/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KesselRunGame/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KesselRunGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KesselRunGame/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KesselRunGame/KesselRunGame.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/KesselRunGame/KesselRunGame.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KesselRunGame/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KesselRunGame/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KesselRunGame/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/KesselRunGame/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../engine" beforeDir="false" afterPath="$PROJECT_DIR$/../engine" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../engine/engine/obj/Debug/Engine.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../engine/engine/obj/Debug/Engine.csproj.FileListAbsolute.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,25 +56,27 @@
     <session id="-1529984134">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cs" value="2243" />
+          <entry key="cs" value="4721" />
+          <entry key="txt" value="42" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="C#" value="2243" />
+          <entry key="C#" value="4721" />
+          <entry key="PLAIN_TEXT" value="42" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="config" value="1" />
-          <entry key="cs" value="15" />
+          <entry key="cs" value="19" />
           <entry key="glsl" value="2" />
           <entry key="png" value="35" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="C#" value="15" />
+          <entry key="C#" value="19" />
           <entry key="Cg" value="2" />
           <entry key="Config" value="1" />
           <entry key="Image" value="35" />
@@ -80,9 +84,9 @@
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.3" value="3" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.3" value="4" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -92,38 +96,60 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/KesselRunGame/Program.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="21" lean-forward="true" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+            <state relative-caret-position="476">
+              <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
               <folding>
-                <marker date="1546823333755" expanded="true" signature="85:970" ph="--- Using Directives ---" />
-                <marker date="1546823333755" expanded="true" signature="125:933" ph="..." />
-                <marker date="1546823333755" expanded="true" signature="999:14257" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="1043:14255" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="2208:2272" ph="/* Terrain ... */" />
-                <marker date="1546823333755" expanded="true" signature="2313:2495" ph="/* Font ... */" />
-                <marker date="1546823333755" expanded="true" signature="2768:2780" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="2790:2827" ph="/* Track &amp; Control Points ... */" />
-                <marker date="1546823333755" expanded="true" signature="2942:11923" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="4581:4978" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="5060:5417" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="6170:6225" ph="/* init matrial settings ... */" />
-                <marker date="1546823333755" expanded="true" signature="7995:8137" ph="/* Load Font ... */" />
-                <marker date="1546823333755" expanded="true" signature="8150:8483" ph="/* bitmapGraphics = new List&lt;BitmapGraphic&gt;(); ... */" />
-                <marker date="1546823333755" expanded="true" signature="10238:11327" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="10502:11313" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="11341:11434" ph="/* Init terrain ... */" />
-                <marker date="1546823333755" expanded="true" signature="12010:12434" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="12067:12359" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="12140:12234" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="12255:12345" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="12500:13011" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="12599:12712" ph="/* TODO: Rhino.Geometry to add splines for camera movement ... */" />
-                <marker date="1546823333755" expanded="true" signature="13077:13754" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="13365:13716" ph="/* terrain.Draw(blueMarbleColorTexture, 1014, blueMarbleColorTexture, stoneNormalTexture, 0.2f, 60); ... */" />
-                <marker date="1546823333755" expanded="true" signature="13810:13863" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="13919:14042" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="14098:14247" ph="{...}" />
-                <marker date="1546823333755" expanded="true" signature="14168:14237" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="85:971" ph="--- Using Directives ---" />
+                <marker date="1550961995466" expanded="true" signature="125:934" ph="..." />
+                <marker date="1550961995466" expanded="true" signature="1000:15143" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="1044:15141" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="2209:2273" ph="/* Terrain ... */" />
+                <marker date="1550961995466" expanded="true" signature="2314:2496" ph="/* Font ... */" />
+                <marker date="1550961995466" expanded="true" signature="2769:2781" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="2833:3180" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="3294:3355" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="3418:12809" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="5069:5466" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="5548:5905" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="6658:6713" ph="/* init matrial settings ... */" />
+                <marker date="1550961995466" expanded="true" signature="8483:8625" ph="/* Load Font ... */" />
+                <marker date="1550961995466" expanded="true" signature="8638:8971" ph="/* bitmapGraphics = new List&lt;BitmapGraphic&gt;(); ... */" />
+                <marker date="1550961995466" expanded="true" signature="10599:11845" ph="/* generate random positions ... */" />
+                <marker date="1550961995466" expanded="true" signature="11859:11913" ph="/* Init terrain ... */" />
+                <marker date="1550961995466" expanded="true" signature="12158:12726" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="12896:13320" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="12953:13245" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="13026:13120" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="13141:13231" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="13386:13897" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="13485:13598" ph="/* TODO: Rhino.Geometry to add splines for camera movement ... */" />
+                <marker date="1550961995466" expanded="true" signature="13963:14640" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="14251:14602" ph="/* terrain.Draw(blueMarbleColorTexture, 1014, blueMarbleColorTexture, stoneNormalTexture, 0.2f, 60); ... */" />
+                <marker date="1550961995466" expanded="true" signature="14696:14749" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="14805:14928" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="14984:15133" ph="{...}" />
+                <marker date="1550961995466" expanded="true" signature="15054:15123" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E1DBDDB7-A624-4BEB-9AA8-F50A536D213C/fe/5f45d645/BSpline.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="112" selection-start-line="12" selection-start-column="105" selection-end-line="12" selection-end-column="112" />
+              <folding>
+                <marker date="1550951441028" expanded="true" signature="0:377" ph="/* Decompiled with JetBrains decompiler ... */" />
+                <marker date="1550951441028" expanded="true" signature="425:2920" ph="{...}" />
+                <marker date="1550951441028" expanded="true" signature="450:2918" ph="{...}" />
+                <marker date="1550951441028" expanded="true" signature="585:2914" ph="{...}" />
+                <marker date="1550951441028" expanded="true" signature="965:1106" ph="{...}" />
+                <marker date="1550951441028" expanded="true" signature="1131:1305" ph="{...}" />
+                <marker date="1550951441028" expanded="true" signature="1489:1548" ph="{...}" />
+                <marker date="1550951441028" expanded="true" signature="2020:2227" ph="{...}" />
+                <marker date="1550951441028" expanded="true" signature="2286:2687" ph="{...}" />
+                <marker date="1550951441028" expanded="true" signature="2377:2679" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -151,8 +177,8 @@
     <setting file="file://$PROJECT_DIR$/../engine/engine/cgimin/engine/octree/Octree.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../engine/engine/cgimin/engine/material/normalmapping/NormalMapping_FS.glsl" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../engine/engine/cgimin/engine/material/normalmapping/NormalMapping_VS.glsl" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E1DBDDB7-A624-4BEB-9AA8-F50A536D213C/fe/5f45d645/BSpline.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KesselRunGame/Properties/AssemblyInfo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///C# Console" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KesselRunGame/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KesselRunGame/packages.config" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../engine/engine/cgimin/engine/camera/Camera.cs" root0="FORCE_HIGHLIGHTING" />
@@ -185,6 +211,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
@@ -200,14 +227,29 @@
             <path>
               <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
               <item name="KesselRunGame" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="engine" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="cgimin" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
               <item name="KesselRunGame" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="engine" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="cgimin" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="engine" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+            <path>
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="KesselRunGame" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="engine" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="cgimin" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="engine" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="octree" type="24d0babc:SolutionExplorerModelNode" />
             </path>
           </expand>
           <select />
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
-      <pane id="FileSystemExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -269,12 +311,13 @@
       <workItem from="1545039071339" duration="2786000" />
       <workItem from="1546638315523" duration="70000" />
       <workItem from="1546648864109" duration="1640000" />
-      <workItem from="1546782994874" duration="15044000" />
+      <workItem from="1546782994874" duration="15267000" />
+      <workItem from="1550931526144" duration="24742000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37669000" />
+    <option name="totallyTimeSpent" value="62634000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -287,8 +330,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10501066" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10607676" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -481,34 +525,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding>
-            <marker date="1546816775311" expanded="true" signature="6:129" ph="..." />
-            <marker date="1546816775311" expanded="true" signature="162:7754" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="188:7752" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="268:456" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="515:598" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="1212:1744" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="1940:2451" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="2462:2599" ph="/* generation of the camera-transformation using LookAt ... */" />
-            <marker date="1546816775311" expanded="true" signature="2677:2864" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="3099:4216" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="4342:6569" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="6189:6559" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="6724:6824" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="6962:7209" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="7012:7174" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="7090:7160" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="7335:7395" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="7454:7511" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="7558:7621" ph="{...}" />
-            <marker date="1546816775311" expanded="true" signature="7675:7745" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/KesselRunGame/Properties/AssemblyInfo.cs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KesselRunGame/packages.config">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/../engine/engine/cgimin/engine/octree/Octree.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1734">
+        <state>
           <folding>
             <marker date="1546615586571" expanded="false" signature="6:118" ph="..." />
             <marker date="1546615586571" expanded="true" signature="157:5421" ph="{...}" />
@@ -538,55 +566,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KesselRunGame/Properties/AssemblyInfo.cs">
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E1DBDDB7-A624-4BEB-9AA8-F50A536D213C/fe/5f45d645/BSpline.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="204">
+          <caret line="12" column="112" selection-start-line="12" selection-start-column="105" selection-end-line="12" selection-end-column="112" />
           <folding>
-            <marker date="1546615538016" expanded="false" signature="6:101" ph="..." />
-            <marker date="1546615538016" expanded="true" signature="103:290" ph="/* General Information about an assembly is controlled through the following ... */" />
-            <marker date="1546615538016" expanded="true" signature="601:811" ph="/* Setting ComVisible to false makes the types in this assembly not visible ... */" />
-            <marker date="1546615538016" expanded="true" signature="986:1313" ph="/* Version information for an assembly consists of the following four values: ... */" />
+            <marker date="1550951441028" expanded="true" signature="0:377" ph="/* Decompiled with JetBrains decompiler ... */" />
+            <marker date="1550951441028" expanded="true" signature="425:2920" ph="{...}" />
+            <marker date="1550951441028" expanded="true" signature="450:2918" ph="{...}" />
+            <marker date="1550951441028" expanded="true" signature="585:2914" ph="{...}" />
+            <marker date="1550951441028" expanded="true" signature="965:1106" ph="{...}" />
+            <marker date="1550951441028" expanded="true" signature="1131:1305" ph="{...}" />
+            <marker date="1550951441028" expanded="true" signature="1489:1548" ph="{...}" />
+            <marker date="1550951441028" expanded="true" signature="2020:2227" ph="{...}" />
+            <marker date="1550951441028" expanded="true" signature="2286:2687" ph="{...}" />
+            <marker date="1550951441028" expanded="true" signature="2377:2679" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KesselRunGame/packages.config">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/KesselRunGame/Program.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="21" lean-forward="true" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+        <state relative-caret-position="476">
+          <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
           <folding>
-            <marker date="1546823333755" expanded="true" signature="85:970" ph="--- Using Directives ---" />
-            <marker date="1546823333755" expanded="true" signature="125:933" ph="..." />
-            <marker date="1546823333755" expanded="true" signature="999:14257" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="1043:14255" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="2208:2272" ph="/* Terrain ... */" />
-            <marker date="1546823333755" expanded="true" signature="2313:2495" ph="/* Font ... */" />
-            <marker date="1546823333755" expanded="true" signature="2768:2780" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="2790:2827" ph="/* Track &amp; Control Points ... */" />
-            <marker date="1546823333755" expanded="true" signature="2942:11923" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="4581:4978" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="5060:5417" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="6170:6225" ph="/* init matrial settings ... */" />
-            <marker date="1546823333755" expanded="true" signature="7995:8137" ph="/* Load Font ... */" />
-            <marker date="1546823333755" expanded="true" signature="8150:8483" ph="/* bitmapGraphics = new List&lt;BitmapGraphic&gt;(); ... */" />
-            <marker date="1546823333755" expanded="true" signature="10238:11327" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="10502:11313" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="11341:11434" ph="/* Init terrain ... */" />
-            <marker date="1546823333755" expanded="true" signature="12010:12434" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="12067:12359" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="12140:12234" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="12255:12345" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="12500:13011" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="12599:12712" ph="/* TODO: Rhino.Geometry to add splines for camera movement ... */" />
-            <marker date="1546823333755" expanded="true" signature="13077:13754" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="13365:13716" ph="/* terrain.Draw(blueMarbleColorTexture, 1014, blueMarbleColorTexture, stoneNormalTexture, 0.2f, 60); ... */" />
-            <marker date="1546823333755" expanded="true" signature="13810:13863" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="13919:14042" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="14098:14247" ph="{...}" />
-            <marker date="1546823333755" expanded="true" signature="14168:14237" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="85:971" ph="--- Using Directives ---" />
+            <marker date="1550961995466" expanded="true" signature="125:934" ph="..." />
+            <marker date="1550961995466" expanded="true" signature="1000:15143" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="1044:15141" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="2209:2273" ph="/* Terrain ... */" />
+            <marker date="1550961995466" expanded="true" signature="2314:2496" ph="/* Font ... */" />
+            <marker date="1550961995466" expanded="true" signature="2769:2781" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="2833:3180" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="3294:3355" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="3418:12809" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="5069:5466" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="5548:5905" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="6658:6713" ph="/* init matrial settings ... */" />
+            <marker date="1550961995466" expanded="true" signature="8483:8625" ph="/* Load Font ... */" />
+            <marker date="1550961995466" expanded="true" signature="8638:8971" ph="/* bitmapGraphics = new List&lt;BitmapGraphic&gt;(); ... */" />
+            <marker date="1550961995466" expanded="true" signature="10599:11845" ph="/* generate random positions ... */" />
+            <marker date="1550961995466" expanded="true" signature="11859:11913" ph="/* Init terrain ... */" />
+            <marker date="1550961995466" expanded="true" signature="12158:12726" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="12896:13320" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="12953:13245" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="13026:13120" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="13141:13231" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="13386:13897" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="13485:13598" ph="/* TODO: Rhino.Geometry to add splines for camera movement ... */" />
+            <marker date="1550961995466" expanded="true" signature="13963:14640" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="14251:14602" ph="/* terrain.Draw(blueMarbleColorTexture, 1014, blueMarbleColorTexture, stoneNormalTexture, 0.2f, 60); ... */" />
+            <marker date="1550961995466" expanded="true" signature="14696:14749" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="14805:14928" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="14984:15133" ph="{...}" />
+            <marker date="1550961995466" expanded="true" signature="15054:15123" ph="{...}" />
           </folding>
         </state>
       </provider>

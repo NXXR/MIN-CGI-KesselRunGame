@@ -200,15 +200,9 @@
         <e p="Properties" t="Include">
           <e p="AssemblyInfo.cs" t="Include" />
         </e>
-        <e p="Win32" t="Include" />
-        <e p="Win64" t="Include" />
       </e>
       <e p="KesselRunGame.sln" t="IncludeFlat" />
-      <e p="packages" t="ExcludeRecursive">
-        <e p="Rhino3dmIO.Desktop.7.0.18352.6055-wip\build\net45\librhino3dmio_native.dylib" t="Include" />
-        <e p="Rhino3dmIO.Desktop.7.0.18352.6055-wip\build\net45\Win32\librhino3dmio_native.dll" t="Include" />
-        <e p="Rhino3dmIO.Desktop.7.0.18352.6055-wip\build\net45\Win64\librhino3dmio_native.dll" t="Include" />
-      </e>
+      <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>
 </project>

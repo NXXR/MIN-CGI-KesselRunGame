@@ -48,12 +48,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
-      <HintPath>..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
+    <Reference Include="Blinkenlights.Splines, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Blinkenlights.BSpline.1.1.0\lib\portable40-net40+win8\Blinkenlights.Splines.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Rhino3dmIO, Version=6.0.0.1, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Rhino3dmIO.Desktop.7.0.18352.6055-wip\lib\net45\Rhino3dmIO.dll</HintPath>
+    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+      <HintPath>..\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -284,13 +284,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Rhino3dmIO.Desktop.7.0.18352.6055-wip\build\net45\Rhino3dmIO.Desktop.targets" Condition="Exists('..\packages\Rhino3dmIO.Desktop.7.0.18352.6055-wip\build\net45\Rhino3dmIO.Desktop.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Rhino3dmIO.Desktop.7.0.18352.6055-wip\build\net45\Rhino3dmIO.Desktop.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Rhino3dmIO.Desktop.7.0.18352.6055-wip\build\net45\Rhino3dmIO.Desktop.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

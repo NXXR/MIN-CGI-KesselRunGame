@@ -89,6 +89,7 @@ namespace Examples.Tutorial
         { }
 
         private readonly double[][] trackPoints = {
+            new []{-30.0, 0.0, 0.0},
             new []{-20.0, 0.0, 0.0},
             new []{-15.0, 0.0, -20.0},
             new []{-10.0, 20.0, -20.0},
@@ -97,15 +98,21 @@ namespace Examples.Tutorial
             new []{5.0, -20.0, 0.0},
             new []{10.0, -20.0, 20.0},
             new []{15.0, 0.0, 20.0},
-            new []{20.0, 0.0, 0.0}
+            new []{20.0, 0.0, 0.0},
+            new []{30.0, 0.0, 0.0}
         };
 
         private const int trackDeg = 3;
 
-        private readonly double[] trackKnots = new double[13]
+        private readonly double[] trackKnots = new double[15]
         {
-            0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 6, 6, 6
+            0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8
         };
+        
+        float trackLength = 0;
+
+        private float velocity = 1000.0f; // velocity = units / updateCounter = x / 1sec (60fps/60)
+        private float distFromStart;
         
 
         protected override void OnLoad(EventArgs e)
@@ -255,13 +262,17 @@ namespace Examples.Tutorial
 
             // Init terrain
             //terrain = new Terrain();
-            
-            float trackLength = 0;
-            float[] oldPoint = Array.ConvertAll(BSpline.Interpolate(0.0, trackDeg, trackPoints, trackKnots, null, null), input => (float) input);
+
+            trackLength = 0.0f;
+            float[] oldPoint = Array.ConvertAll(
+                BSpline.Interpolate(0.0, trackDeg, trackPoints, trackKnots, null, null),
+                input => (float) input);
             for (double t = 0; t <= 1; t += 0.001)
             {
-                float[] point = Array.ConvertAll(BSpline.Interpolate(t, trackDeg, trackPoints, trackKnots, null, null), input => (float)input);
-                octree.AddEntity(new OctreeEntity(smoothObject, normalMappingCubeSpecularMaterial, blueShinyStoneSettings, Matrix4.CreateTranslation(point[0], point[1], point[2])));
+                float[] point = Array.ConvertAll(
+                    BSpline.Interpolate(t, trackDeg, trackPoints, trackKnots, null, null),
+                    input => (float)input);
+                //octree.AddEntity(new OctreeEntity(smoothObject, normalMappingCubeSpecularMaterial, blueShinyStoneSettings, Matrix4.CreateTranslation(point[0], point[1], point[2])));
                 // calculate length of vector form old to new point and add to trackLength
                 trackLength += new Vector3(point[0] - oldPoint[0], point[1] - oldPoint[1], point[2] - oldPoint[2]).Length;
             }
@@ -291,13 +302,23 @@ namespace Examples.Tutorial
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             KeyboardState keyboardState = Keyboard.GetState();
-            
-            // TODO: Rhino.Geometry to add splines for camera movement
 
-            // update the fly-cam with keyboard input
+            distFromStart = velocity * ((float) updateCounter / 60);
+            double distNormalized = distFromStart / trackLength;
+            float[] lookAtPos = Array.ConvertAll(
+                BSpline.Interpolate(distNormalized >= 1 ? 1 : distNormalized+0.001 , trackDeg, trackPoints, trackKnots, null, null),
+                input => (float)input);
+            float[] cameraPos = Array.ConvertAll(
+                BSpline.Interpolate(distNormalized, trackDeg, trackPoints, trackKnots, null, null),
+                input => (float) input);
+            
+            Camera.SetLookAt(new Vector3(cameraPos[0], cameraPos[1], cameraPos[2]), new Vector3(lookAtPos[0], lookAtPos[1], lookAtPos[2]), Vector3.UnitY);
+
+            /*/ update the fly-cam with keyboard input
             Camera.UpdateFlyCamera(keyboardState[Key.Left], keyboardState[Key.Right], keyboardState[Key.Up], keyboardState[Key.Down],
                                    keyboardState[Key.W], keyboardState[Key.S]);
-
+            //*/
+            Console.WriteLine(updateCounter/60);
             // updateCounter simply increaes
             updateCounter++;
         }

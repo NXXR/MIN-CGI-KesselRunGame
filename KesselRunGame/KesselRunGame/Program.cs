@@ -305,11 +305,12 @@ namespace Examples.Tutorial
 
             distFromStart = velocity * ((float) updateCounter / 60);
             double distNormalized = distFromStart / trackLength;
+            if (distNormalized > 1) distNormalized = 1.0f;
             float[] lookAtPos = Array.ConvertAll(
-                BSpline.Interpolate(distNormalized >= 1 ? 1 : distNormalized+0.001 , trackDeg, trackPoints, trackKnots, null, null),
+                BSpline.Interpolate(distNormalized, trackDeg, trackPoints, trackKnots, null, null),
                 input => (float)input);
             float[] cameraPos = Array.ConvertAll(
-                BSpline.Interpolate(distNormalized, trackDeg, trackPoints, trackKnots, null, null),
+                BSpline.Interpolate(distNormalized <= 0.001? 0.0f : distNormalized-0.001, trackDeg, trackPoints, trackKnots, null, null),
                 input => (float) input);
             
             Camera.SetLookAt(new Vector3(cameraPos[0], cameraPos[1], cameraPos[2]), new Vector3(lookAtPos[0], lookAtPos[1], lookAtPos[2]), Vector3.UnitY);
@@ -318,8 +319,8 @@ namespace Examples.Tutorial
             Camera.UpdateFlyCamera(keyboardState[Key.Left], keyboardState[Key.Right], keyboardState[Key.Up], keyboardState[Key.Down],
                                    keyboardState[Key.W], keyboardState[Key.S]);
             //*/
-            Console.WriteLine(updateCounter/60);
-            // updateCounter simply increaes
+            Console.WriteLine(distNormalized > 1 ? 1.0f : distNormalized+0.001);
+            // updateCounter simply increases
             updateCounter++;
         }
 

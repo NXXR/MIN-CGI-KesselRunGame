@@ -319,7 +319,7 @@ namespace Examples.Tutorial
             Camera.UpdateFlyCamera(keyboardState[Key.Left], keyboardState[Key.Right], keyboardState[Key.Up], keyboardState[Key.Down],
                                    keyboardState[Key.W], keyboardState[Key.S]);
             //*/
-            Console.WriteLine(distNormalized > 1 ? 1.0f : distNormalized+0.001);
+            
             // updateCounter simply increases
             updateCounter++;
         }

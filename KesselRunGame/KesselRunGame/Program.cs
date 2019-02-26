@@ -111,7 +111,7 @@ namespace Examples.Tutorial
         
         float trackLength = 0;
 
-        private float velocity = 1000.0f; // velocity = units / updateCounter = x / 1sec (60fps/60)
+        private float velocity = 2.0f; // velocity = units / updateCounter = x / 1sec (60fps/60)
         private float distFromStart;
         
 
@@ -122,7 +122,7 @@ namespace Examples.Tutorial
             // Initialize Camera
             Camera.Init();
             Camera.SetWidthHeightFov(1280, 720, 60);
-            Camera.SetLookAt(new Vector3(0, 0, 3), new Vector3(0, 0, 0), Vector3.UnitY);
+            Camera.SetLookAt(new Vector3(0, 0, 3), new Vector3(0, 0, 0), Vector3.UnitZ);
 
             // Initialize Light
             cgimin.engine.light.Light.SetDirectionalLight(new Vector3(1, -1, 2), new Vector4(0.3f, 0.3f, 0.3f, 0), new Vector4(0.8f, 0.8f, 0.8f, 0), new Vector4(1, 1, 1, 0));
@@ -275,9 +275,10 @@ namespace Examples.Tutorial
                 //octree.AddEntity(new OctreeEntity(smoothObject, normalMappingCubeSpecularMaterial, blueShinyStoneSettings, Matrix4.CreateTranslation(point[0], point[1], point[2])));
                 // calculate length of vector form old to new point and add to trackLength
                 trackLength += new Vector3(point[0] - oldPoint[0], point[1] - oldPoint[1], point[2] - oldPoint[2]).Length;
+                oldPoint = point;
+                Console.WriteLine(trackLength);
             }
-            Console.WriteLine("[INFO]    trackLength: " + trackLength);
-
+            
         }
 
         private void KeyDownEvent(object sender, OpenTK.Input.KeyboardKeyEventArgs e)
@@ -367,5 +368,15 @@ namespace Examples.Tutorial
         }
 
 
+        Vector3 getPerpendicular(Vector3 x)
+        {
+            Random rnd = new Random(1567845648);
+            Vector3 e = new Vector3((float)rnd.Next(0,9999)/100, (float)rnd.Next(0,9999)/100, (float)rnd.Next(0,9999)/100); // create random vector e
+            while (e.Normalized().Equals(x.Normalized())) // recreate vector e if it is parallel to x
+            {
+                e = new Vector3((float)rnd.Next(0,9999)/100, (float)rnd.Next(0,9999)/100, (float)rnd.Next(0,9999)/100);
+            }
+            return Vector3.Cross(x, e).Normalized(); // return the normalized cross product of input and random vector to get a unit vector perpendicular to x
+        }
     }
 }

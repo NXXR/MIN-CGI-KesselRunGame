@@ -183,6 +183,7 @@
             <e p="shadow_color.png" t="Include" />
             <e p="simple_reflection.png" t="Include" />
             <e p="single_color.png" t="Include" />
+            <e p="single_color2.png" t="Include" />
             <e p="sofa_pattern_normal.png" t="Include" />
             <e p="stone_normal.png" t="Include" />
             <e p="tennis_ball.png" t="Include" />
@@ -193,6 +194,7 @@
           </e>
         </e>
         <e p="KesselRunGame.csproj" t="IncludeRecursive" />
+        <e p="level.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
         <e p="OpenTK.dll.config" t="Include" />
         <e p="packages.config" t="Include" />

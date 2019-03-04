@@ -47,9 +47,13 @@ namespace Examples.Tutorial
         private ObjLoaderObject3D cornerObject;
         private ObjLoaderObject3D sphereObject;
 
+        private ObjLoaderObject3D playerObject;
+
         // our textur-IDs
         private int checkerColorTexture;
         private int blueMarbleColorTexture;
+
+        private int playerColorTexture;
 
         // normal map textures
         private int brickNormalTexture;
@@ -77,7 +81,7 @@ namespace Examples.Tutorial
         private SkyBox skyBox;
 
         // Font
-        //private BitmapFont abelFont;
+        private BitmapFont abelFont;
 
         // Bitmap Graphics
         //private List<BitmapGraphic> bitmapGraphics;
@@ -109,6 +113,7 @@ namespace Examples.Tutorial
             torusObject = new ObjLoaderObject3D("data/objects/torus_smooth.obj", 0.8f, true);
             cornerObject = new ObjLoaderObject3D("data/objects/cube.obj", 0.3f, true);
             sphereObject = new ObjLoaderObject3D("data/objects/sphere.obj", 0.2f, true);
+            
             
 
             // Loading color textures
@@ -175,7 +180,7 @@ namespace Examples.Tutorial
             skyBox = new SkyBox("data/skybox/neon_front.png", "data/skybox/neon_back.png", "data/skybox/neon_left.png", "data/skybox/neon_right.png", "data/skybox/neon_up.png", "data/skybox/neon_down.png");
 
             // Load Font
-            //abelFont = new BitmapFont("data/fonts/abel_normal.fnt", "data/fonts/abel_normal.png");
+            abelFont = new BitmapFont("data/fonts/abel_normal.fnt", "data/fonts/abel_normal.png");
 
             // Load Sprites
             /*
@@ -250,13 +255,14 @@ namespace Examples.Tutorial
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
+            float varX = 0, varY = 0;
+            if (keyboardState[Key.W]) varY += 0.01f;
+            if (keyboardState[Key.S]) varY -= 0.01f;
+            if (keyboardState[Key.D]) varX += 0.01f;
+            if (keyboardState[Key.A]) varX -= 0.01f;
+            lvl.modifyPlayerPos(varX, varY);
             lvl.OnUpdateframe();
 
-            /* update the fly-cam with keyboard input
-            Camera.UpdateFlyCamera(keyboardState[Key.Left], keyboardState[Key.Right], keyboardState[Key.Up], keyboardState[Key.Down],
-                                   keyboardState[Key.W], keyboardState[Key.S]);
-            //*/
-            
             // updateCounter simply increases
             updateCounter++;
         }
@@ -271,11 +277,19 @@ namespace Examples.Tutorial
             skyBox.Draw();
             
             octree.Draw();
+
+            OctreeEntity rp = lvl.getRacePoint();
+            rp.Object3d.Transformation = rp.Transform;
+            rp.Material.DrawWithSettings(rp.Object3d, rp.MaterialSetting);
+
+            OctreeEntity pp = lvl.getplayerPoint();
+            pp.Object3d.Transformation = pp.Transform;
+            rp.Material.DrawWithSettings(pp.Object3d, pp.MaterialSetting);
             //terrain.Draw(blueMarbleColorTexture, 1014, blueMarbleColorTexture, stoneNormalTexture, 0.2f, 60);
 
             //bitmapGraphics[(updateCounter / 10) % 8].Draw((updateCounter * 2 % 1920) - 1920 * 0.5f, 100, 1);
 
-            //abelFont.DrawString("Hallo, dies ist ein Text! Dargestellt mit der BitmapFont Klasse...", -700, -200,   255, 255, 255, 255);
+            if (lvl.getCollision()) abelFont.DrawString("Collision Detected!  Game Over", -700, -200,   255, 255, 255, 255);
 
             SwapBuffers();
         }

@@ -109,13 +109,23 @@
     <Content Include="data\fonts\abel_normal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data\objects\.vs\objects\v15\.suo" />
+    <Content Include="data\objects\.vs\ProjectSettings.json" />
+    <Content Include="data\objects\.vs\slnx.sqlite" />
+    <Content Include="data\objects\.vs\VSWorkspaceState.json" />
     <Content Include="data\objects\abstract_statue.obj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data\objects\cube.obj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data\objects\millenium_falcon.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data\objects\round_stone.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\objects\spaceship.obj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data\objects\sphere.obj">
@@ -232,7 +242,13 @@
     <Content Include="data\textures\marble_blue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="data\textures\marble_gray.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data\textures\mario_sprite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\textures\millenium_falcon_col-tex.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data\textures\primitives_normal.png">
@@ -254,6 +270,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data\textures\sofa_pattern_normal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\textures\space_ship_test_color.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data\textures\stone_normal.png">

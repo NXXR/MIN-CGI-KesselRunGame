@@ -125,10 +125,22 @@
             <e p="abel_normal.png" t="Include" />
           </e>
           <e p="objects" t="Include">
+            <e p=".vs" t="Include">
+              <e p="objects" t="Include">
+                <e p="v15" t="Include">
+                  <e p=".suo" t="Include" />
+                </e>
+              </e>
+              <e p="ProjectSettings.json" t="Include" />
+              <e p="slnx.sqlite" t="Include" />
+              <e p="VSWorkspaceState.json" t="Include" />
+            </e>
             <e p="abstract_statue.obj" t="Include" />
             <e p="cube.obj" t="Include" />
+            <e p="millenium_falcon.obj" t="Include" />
             <e p="monkey.obj" t="Include" />
             <e p="round_stone.obj" t="Include" />
+            <e p="spaceship.obj" t="Include" />
             <e p="sphere.obj" t="Include" />
             <e p="tennis_arena.obj" t="Include" />
             <e p="tennis_ball.obj" t="Include" />
@@ -177,7 +189,9 @@
             <e p="env_reflect_right.png" t="Include" />
             <e p="env_reflect_top.png" t="Include" />
             <e p="marble_blue.png" t="Include" />
+            <e p="marble_gray.png" t="Include" />
             <e p="mario_sprite.png" t="Include" />
+            <e p="millenium_falcon_col-tex.png" t="Include" />
             <e p="primitives_normal.png" t="Include" />
             <e p="relief_normal.png" t="Include" />
             <e p="shadow_color.png" t="Include" />
@@ -185,6 +199,7 @@
             <e p="single_color.png" t="Include" />
             <e p="single_color2.png" t="Include" />
             <e p="sofa_pattern_normal.png" t="Include" />
+            <e p="space_ship_test_color.png" t="Include" />
             <e p="stone_normal.png" t="Include" />
             <e p="tennis_ball.png" t="Include" />
             <e p="tennis_field.png" t="Include" />
